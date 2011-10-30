@@ -16,7 +16,7 @@ class GameTest extends AssertionsForJUnit {
     date = new SimpleDateFormat("yyy-MM-dd").parse("2011-08-13")
     team = "sfn"
     game = new Game(date, team)
-    game.fetchStrategy = TestFetchStrategy
+    game.fetchStrategy = new TestFetchStrategy
   }
 
   @Test def testInitialization {
@@ -25,7 +25,7 @@ class GameTest extends AssertionsForJUnit {
   }
 
   @Test def testFetchStrategyPropagation {
-    assertEquals(TestFetchStrategy.getClass, game.boxScore.fetchStrategy.getClass)
+    assertEquals(game.fetchStrategy.getClass, game.boxScore.fetchStrategy.getClass)
   }
 
   @Test def testGameTime {

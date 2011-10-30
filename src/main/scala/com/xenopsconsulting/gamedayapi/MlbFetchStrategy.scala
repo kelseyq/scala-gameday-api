@@ -4,7 +4,7 @@ import scala.xml._
 import dispatch._
 import java.util.Date
 
-object MlbFetchStrategy extends FetchStrategy {
+class MlbFetchStrategy extends FetchStrategy {
   val http = new Http
 
   def fetchEpg(date: Date): Elem = {

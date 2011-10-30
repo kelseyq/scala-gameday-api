@@ -3,7 +3,7 @@ package com.xenopsconsulting.gamedayapi
 import xml.Elem
 import java.util.Date
 
-object TestFetchStrategy extends FetchStrategy {
+class TestFetchStrategy extends FetchStrategy {
 
   /*
     All test XML file is bound to the following:

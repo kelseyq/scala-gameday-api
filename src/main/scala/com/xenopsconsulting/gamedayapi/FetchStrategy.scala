@@ -6,11 +6,17 @@ import xml.Elem
 
 trait FetchStrategy {
   private val base_mlb_url: String = "http://gd2.mlb.com/components/game/mlb"
+  private var _gid:String = _
 
   def fetchEpg(date: Date): Elem
   def fetchGame(date: Date, team: String): Elem
   def fetchBoxScore(date: Date, team: String): Elem
   def fetchLineScore(date: Date, team: String): Elem
+
+  def gid(date: Date, team: String) = {
+    if (_gid == null) _gid = extractGidFromEpg(fetchEpg(date), team)
+    _gid
+  }
 
   def epgUrl(date: Date): String = {
     val urlBuffer: StringBuffer = new StringBuffer(base_mlb_url)
@@ -18,11 +24,11 @@ trait FetchStrategy {
     urlBuffer.append("/epg.xml")
     urlBuffer.toString
   }
-  
+
   def gameUrl(date: Date, team: String): String = {
     buildUrl(date, team, "game.xml")
   }
-  
+
   def boxScoreUrl(date: Date, team: String): String = {
     buildUrl(date, team, "boxscore.xml")
   }
@@ -36,7 +42,7 @@ trait FetchStrategy {
   }
 
   protected def gameDirectoryPath(date: Date, team: String) = {
-    datePath(date) + "/" + extractGidFromEpg(fetchEpg(date), team)
+    datePath(date) + "/" + gid(date, team)
   }
 
   protected def datePath(date: Date): String = {

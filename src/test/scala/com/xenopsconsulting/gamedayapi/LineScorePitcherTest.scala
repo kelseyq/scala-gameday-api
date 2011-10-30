@@ -17,7 +17,7 @@ class LineScorePitcherTest extends AssertionsForJUnit {
     date = new SimpleDateFormat("yyy-MM-dd").parse("2011-08-13")
     team = "sea"
     lineScore = new LineScore(date, team)
-    lineScore.fetchStrategy = TestFetchStrategy
+    lineScore.fetchStrategy = new TestFetchStrategy
     lineScorePitcher = lineScore.winningPitcher
   }
 
