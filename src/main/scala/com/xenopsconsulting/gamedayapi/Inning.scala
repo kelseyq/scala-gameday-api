@@ -6,20 +6,20 @@ case class Inning(inningNode: Node, game: Game = null) {
 
   def top() = {
     try {
-      HalfInning((inningNode \ "top").head, this)
+      Some(HalfInning((inningNode \ "top").head, this))
     } catch {
       case e => {
-        HalfInning(<top/>, this)
+        None
       }
     }
   }
 
   def bottom() = {
     try {
-      HalfInning((inningNode \ "bottom").head, this)
+      Some(HalfInning((inningNode \ "bottom").head, this))
     } catch {
       case e => {
-        HalfInning(<bottom/>, this)
+        None
       }
     }
   }
@@ -36,7 +36,7 @@ case class Inning(inningNode: Node, game: Game = null) {
    * @return A list of AtBat objects
    */
   def atBats() = {
-    top.atBats ++ bottom.atBats
+    top.map(_.atBats).getOrElse(Nil) ++ bottom.map(_.atBats).getOrElse(Nil)
   }
 
   /**
