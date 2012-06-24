@@ -14,7 +14,6 @@ case class AtBat(atBatNode: Node, inning: Inning = null) {
   def o() = ( atBatNode \ "@o" ).text
   def startTfs() = ( atBatNode \ "@start_tfs" ).text
   def startTfsZulu() = ( atBatNode \ "@start_tfs_zulu" ).text
-  def batter() = ( atBatNode \ "@batter" ).text
   def stand() = ( atBatNode \ "@stand" ).text
   def bHeight() = ( atBatNode \ "@b_height" ).text
   def pThrows() = ( atBatNode \ "@p_throws" ).text
@@ -37,6 +36,18 @@ case class AtBat(atBatNode: Node, inning: Inning = null) {
   def pitcher() = {
     val game = inning.game
     (game.pitchers.find (_.id == ( atBatNode \ "@pitcher" ).text)).get
+  }
+
+  /**
+   * This batter method does not return the id of the batter that is in
+   * the Gameday XML, but instead returns a reference to a batter object.
+   * To obtain the id in the XML, you may call Batter#id
+   *
+   * @return Batter
+   */
+  def batter() = {
+    val game = inning.game
+    (game.batters.find (_.id == ( atBatNode \ "@batter" ).text)).get
   }
 
 }
