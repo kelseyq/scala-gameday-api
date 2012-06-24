@@ -1,8 +1,27 @@
-.idea/
-*.iml
+*.class
+*.log
+
+# sbt specific
+dist/*
 target/
-boot/
-.classpath
-.project
-*.ipr
-*.iws
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Scala-IDE specific
+.scala_dependencies
+
+# OS generated files #
+######################
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+*.swp
+*~
+.metadata/**/*
+.metadata/*
+*/.DS_Store
+.DS_Store
+.ensime*
