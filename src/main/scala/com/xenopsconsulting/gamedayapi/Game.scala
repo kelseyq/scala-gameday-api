@@ -116,6 +116,20 @@ case class Game(date: Date, team: String) extends XmlRepresentation(date: Date, 
     boxScore.awayBatters ++ boxScore.homeBatters
   }
 
+  /**
+   * A convenience method for accessing the current batter
+   *
+   * @return Some(Batter) or None if the game hasn't started
+   */
+  def atBat() = {
+    val batterId = innings.atBat
+    if (batterId.isEmpty) {
+      None
+    } else {
+    (batters.find (_.id == batterId))
+    }
+  }
+
   private def homeTeamNode = ((gameNode \ "team") find { _.attribute("type").get.text == "home" }).get
   private def awayTeamNode = ((gameNode \ "team") find { _.attribute("type").get.text == "away" }).get
   private def stadiumNode = (gameNode \ "stadium")
